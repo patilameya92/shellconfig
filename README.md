@@ -26,7 +26,7 @@ Install Antidote: `brew install antidote`
 
 ### Zsh Plugins
 
-zsh-users/zsh-autosuggestions: [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-zsh-users/zsh-completions: [https://github.com/zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
-zsh-users/zsh-history-substring-search: [https://github.com/zsh-users/zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
-zsh-users/zsh-syntax-highlighting: [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+zsh-users/zsh-autosuggestions: [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)  
+zsh-users/zsh-completions: [https://github.com/zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)  
+zsh-users/zsh-history-substring-search: [https://github.com/zsh-users/zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)  
+zsh-users/zsh-syntax-highlighting: [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)  
