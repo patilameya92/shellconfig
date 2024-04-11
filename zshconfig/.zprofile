@@ -7,7 +7,7 @@ OS_TYPE=$(uname -s)
 
 # Function to check if the OS is MacOS
 is_macos() {
-  [[ "$OS_TYPE" == "Darwin" ]]
+  [[ "${OS_TYPE}" == "Darwin" ]]
 }
 
 # Homebrew for MacOS
@@ -19,5 +19,5 @@ fi
 if is_macos; then
     GITPROMPT_SCRIPT='/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh'
     # shellcheck disable=SC1090
-    source ${GITPROMPT_SCRIPT}
+    source "${GITPROMPT_SCRIPT}"
 fi

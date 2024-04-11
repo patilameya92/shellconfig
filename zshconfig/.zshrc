@@ -9,7 +9,7 @@
 export CLICOLOR=1
 
 ## Persist zsh history
-HISTFILE=${ZDOTDIR}/.zsh_history
+HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=1000
 setopt SHARE_HISTORY
@@ -32,13 +32,13 @@ if is_macos; then
 fi
 
 ## Antidote plugin setup
-zsh_plugins=${ZDOTDIR}/.zsh_plugins
+zsh_plugins="${ZDOTDIR}/.zsh_plugins"
 
 if is_macos; then
-    source "${HOMEBREW_PREFIX}"/opt/antidote/share/antidote/antidote.zsh
+    source "${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh"
 fi
 
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+if [[ ! "${zsh_plugins}".zsh -nt "${zsh_plugins}".txt ]]; then
     (
         antidote bundle <"${zsh_plugins}".txt >"${zsh_plugins}".zsh
     )

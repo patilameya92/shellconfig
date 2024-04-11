@@ -7,7 +7,7 @@
 
 # Golang
 export GOROOT=/usr/local/go
-export GOPATH='/Users/ameya.patil/code'
+export GOPATH="/Users/${USER}/code"
 
 # PATH
-export PATH=$PATH:$GOROOT/bin
+export PATH="${PATH}:${GOROOT}/bin"
