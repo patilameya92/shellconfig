@@ -8,22 +8,28 @@ OS_TYPE=$(uname -s)
 # Function to check if the OS is MacOS
 is_macos() {
     [[ "${OS_TYPE}" == "Darwin" ]]
-  
-    export MACOS_CPU=$(sysctl -n machdep.cpu.brand_string)
 }
 
-# Homebrew for MacOS
+# macOS specific configuration
 if is_macos; then
-    if [[ "${MACOS_CPU}" == "Apple*" ]]; then
+    # Set the macOS machine CPU type
+    MACOS_CPU=$(sysctl -n machdep.cpu.brand_string)
+    export MACOS_CPU
+
+    # Set Homebrew path
+    if [[ "${MACOS_CPU}" == Apple* ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
     else
         eval "$(/usr/local/bin/brew shellenv)"
     fi
-fi
 
-# Git prompt configuration for MacOS
-if is_macos; then
+    # Git prompt configuration for MacOS
     GITPROMPT_SCRIPT='/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh'
     # shellcheck disable=SC1090
-    source "${GITPROMPT_SCRIPT}"    
+    source "${GITPROMPT_SCRIPT}"
+fi
+
+# Check if .zprofile_local exists and source it
+if [[ -f "${ZDOTDIR}/extras/.zprofile_local" ]]; then
+    source "${ZDOTDIR}/extras/.zprofile_local"
 fi

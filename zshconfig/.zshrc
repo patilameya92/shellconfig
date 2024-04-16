@@ -18,19 +18,6 @@ setopt SHARE_HISTORY
 setopt prompt_subst
 PROMPT="%F{green}%n@%m%f %F{cyan}%(3~|../%2~|%~)%f%F{yellow}\$(__git_ps1)%f> "
 
-## Keyboard behaviour
-if is_macos; then
-    # Move forward by word with Option+RightArrow or Alt+RightArrow
-    bindkey '^[^[[C' forward-word
-
-    # Move backward by word with Option+LeftArrow or Alt+LeftArrow
-    bindkey '^[^[[D' backward-word
-
-    ### Bindkey to use fn
-    bindkey '^[[H' beginning-of-line
-    bindkey '^[[F' end-of-line
-fi
-
 ## Antidote plugin setup
 zsh_plugins="${ZDOTDIR}/.zsh_plugins"
 
@@ -45,10 +32,34 @@ if [[ ! "${zsh_plugins}".zsh -nt "${zsh_plugins}".txt ]]; then
 fi
 source "${zsh_plugins}".zsh
 
+## Keyboard behaviour
+if is_macos; then
+    # Move forward by word with Option+RightArrow or Alt+RightArrow
+    bindkey '^[^[[C' forward-word
+
+    # Move backward by word with Option+LeftArrow or Alt+LeftArrow
+    bindkey '^[^[[D' backward-word
+
+    ### Bindkey to use fn
+    bindkey '^[[H' beginning-of-line
+    bindkey '^[[F' end-of-line
+
+    # zsh-history-substring-search configuration
+    bindkey '^[[A' history-substring-search-up # or '\eOA'
+    bindkey '^[[B' history-substring-search-down # or '\eOB'
+    HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+fi
 
 # Aliases
 ## Call neovim instead of vim
-alias vim='/opt/homebrew/bin/nvim'
+if is_macos; then
+    alias vim="${HOMEBREW_PREFIX}/bin/nvim"
+fi
 
 # Kubernetes
 alias k='kubectl'
+
+# Check if .zshrc_local exists and source it
+if [[ -f "${ZDOTDIR}/extras/.zshrc_local" ]]; then
+    source "${ZDOTDIR}/extras/.zshrc_local"
+fi

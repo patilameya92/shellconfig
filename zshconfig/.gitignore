@@ -3,3 +3,6 @@
 
 # Generated .zsh file by antidote
 .zsh_plugins.zsh
+
+# Exclude anything inside the extras directory
+extras/**

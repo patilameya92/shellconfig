@@ -11,3 +11,8 @@ export GOPATH="/Users/${USER}/code"
 
 # PATH
 export PATH="${PATH}:${GOROOT}/bin"
+
+# Check if .zshenv_local exists and source it
+if [[ -f "${ZDOTDIR}/extras/.zshenv_local" ]]; then
+    source "${ZDOTDIR}/extras/.zshenv_local"
+fi
