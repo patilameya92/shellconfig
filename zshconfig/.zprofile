@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # These files are read when starting as a login shell.
 # They are used for executing commands at the start of a login session.
 # The /etc/zsh/zprofile is for all users, and $ZDOTDIR/.zprofile is for
@@ -31,5 +32,6 @@ fi
 
 # Check if .zprofile_local exists and source it
 if [[ -f "${ZDOTDIR}/extras/.zprofile_local" ]]; then
+    # shellcheck disable=SC1091
     source "${ZDOTDIR}/extras/.zprofile_local"
 fi
