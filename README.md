@@ -6,7 +6,7 @@
 
 #### For MacOS
 
-To set up Zsh config on macOS, install prerequisites and then set the ZDOTDIR variable in `/etc/zshenv`
+To set up Zsh config on macOS, install prerequisites and then set the ZDOTDIR variable.
 
 ##### Install macOS Prerequisites
 
@@ -15,6 +15,8 @@ To set up Zsh config on macOS, install prerequisites and then set the ZDOTDIR va
 - Antidote: `brew install antidote`
 
 #### For Rocky Linux 9
+
+To set up Zsh config on Rocky Linux 9, install prerequisites and then set the ZDOTDIR variable.
 
 ##### Install Rocky Linux 9 Prerequisites
 
