@@ -18,15 +18,40 @@ setopt SHARE_HISTORY
 
 ## Prompt configuration
 setopt prompt_subst
-# shellcheck disable=SC2034
-PROMPT="%F{green}%n@%m%f %F{cyan}%(3~|../%2~|%~)%f%F{yellow}\$(__git_ps1)%f> "
+
+# Git prompt configuration for MacOS
+if is_macos; then
+    GITPROMPT_SCRIPT='/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh'
+fi
+
+if is_linux; then
+    # Set LINUX_GITPROMPT_SCRIPT_PATH in "${ZDOTDIR}/extras/.zshenv_local"
+    GITPROMPT_SCRIPT="${LINUX_GITPROMPT_SCRIPT_PATH}"
+fi
+
+if [[ -f "${GITPROMPT_SCRIPT}" ]]; then
+    # shellcheck disable=SC1090
+    source "${GITPROMPT_SCRIPT}"
+    # Define the prompt
+    PROMPT="%F{magenta}%n%f%B@%b%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %F{yellow}\$(__git_ps1)%f %B>%b "
+else
+    # Define the prompt
+    # shellcheck disable=SC2034
+    PROMPT="%F{magenta}%n%f%B@%b%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %B>%b "
+fi
 
 ## Antidote plugin setup
 zsh_plugins="${ZDOTDIR}/.zsh_plugins"
 
 if is_macos; then
-    # shellcheck disable=SC1091
+    # shellcheck disable=SC1090,SC1091
     source "${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh"
+fi
+
+if is_linux; then
+    # Set LINUX_ANTIDOTE_PATH in "${ZDOTDIR}/extras/.zshenv_local"
+    # shellcheck disable=SC1090
+    source "${LINUX_ANTIDOTE_PATH}"
 fi
 
 if [[ ! "${zsh_plugins}".zsh -nt "${zsh_plugins}".txt ]]; then
@@ -38,23 +63,21 @@ fi
 source "${zsh_plugins}".zsh
 
 ## Keyboard behaviour
-if is_macos; then
-    # Move forward by word with Option+RightArrow or Alt+RightArrow
-    bindkey '^[^[[C' forward-word
+# Move forward by word with Option+RightArrow or Alt+RightArrow
+bindkey '^[^[[C' forward-word
 
-    # Move backward by word with Option+LeftArrow or Alt+LeftArrow
-    bindkey '^[^[[D' backward-word
+# Move backward by word with Option+LeftArrow or Alt+LeftArrow
+bindkey '^[^[[D' backward-word
 
-    ### Bindkey to use fn
-    bindkey '^[[H' beginning-of-line
-    bindkey '^[[F' end-of-line
+### Bindkey to use fn
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
 
-    # zsh-history-substring-search configuration
-    bindkey '^[[A' history-substring-search-up # or '\eOA'
-    bindkey '^[[B' history-substring-search-down # or '\eOB'
-    # shellcheck disable=SC2034
-    HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-fi
+# zsh-history-substring-search configuration
+bindkey '^[[A' history-substring-search-up # or '\eOA'
+bindkey '^[[B' history-substring-search-down # or '\eOB'
+# shellcheck disable=SC2034
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # Aliases
 ## Call neovim instead of vim

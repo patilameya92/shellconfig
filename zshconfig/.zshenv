@@ -6,12 +6,28 @@
 # it's a good place for PATH and other critical environment variables
 # that programs rely on.
 
-# Golang
-export GOROOT=/usr/local/go
-export GOPATH="/Users/${USER}/code"
+OS_TYPE=$(uname -s)
 
-# PATH
-export PATH="${PATH}:${GOROOT}/bin"
+# Function to check if the OS is MacOS
+is_macos() {
+    [[ "${OS_TYPE}" == "Darwin" ]]
+}
+
+# Function to check if the OS is Linux
+is_linux() {
+    [[ "${OS_TYPE}" == "Linux" ]]
+}
+
+if is_macos; then
+    # Golang
+    export GOROOT=/usr/local/go
+    export GOPATH="/Users/${USER}/code"
+
+    # PATH
+    PATH="${PATH}:${GOROOT}/bin"
+fi
+
+export PATH
 
 # Check if .zshenv_local exists and source it
 if [[ -f "${ZDOTDIR}/extras/.zshenv_local" ]]; then

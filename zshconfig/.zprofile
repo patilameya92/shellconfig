@@ -1,15 +1,9 @@
 # shellcheck disable=SC2148
 # These files are read when starting as a login shell.
 # They are used for executing commands at the start of a login session.
+# This file is used for configurations that should be applied once at login.
 # The /etc/zsh/zprofile is for all users, and $ZDOTDIR/.zprofile is for
 # the individual user.
-
-OS_TYPE=$(uname -s)
-
-# Function to check if the OS is MacOS
-is_macos() {
-    [[ "${OS_TYPE}" == "Darwin" ]]
-}
 
 # macOS specific configuration
 if is_macos; then
@@ -24,10 +18,6 @@ if is_macos; then
         eval "$(/usr/local/bin/brew shellenv)"
     fi
 
-    # Git prompt configuration for MacOS
-    GITPROMPT_SCRIPT='/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh'
-    # shellcheck disable=SC1090
-    source "${GITPROMPT_SCRIPT}"
 fi
 
 # Check if .zprofile_local exists and source it
