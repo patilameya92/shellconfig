@@ -33,11 +33,11 @@ if [[ -f "${GITPROMPT_SCRIPT}" ]]; then
     # shellcheck disable=SC1090
     source "${GITPROMPT_SCRIPT}"
     # Define the prompt
-    PROMPT="%F{magenta}%n%f%B@%b%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %F{yellow}\$(__git_ps1)%f %B>%b "
+    PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %F{yellow}\$(__git_ps1)%f]$ "
 else
     # Define the prompt
     # shellcheck disable=SC2034
-    PROMPT="%F{magenta}%n%f%B@%b%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %B>%b "
+    PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f]$ "
 fi
 
 ## Antidote plugin setup
