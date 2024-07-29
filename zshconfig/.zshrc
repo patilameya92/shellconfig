@@ -1,3 +1,4 @@
+
 # shellcheck disable=SC2148
 # These files are read when starting as an interactive shell.
 # They are used for setting interactive shell configuration and executing
@@ -5,42 +6,44 @@
 # applies to the individual user. it's the right place for aliases,
 # functions, key bindings, and interactive shell options.
 
-# CLI behaviour
-## Colour the output of ls
+# =========================
+# =     CLI behaviour     =
+# =========================
+# == Colour the output of ls == 
 export CLICOLOR=1
 
-## Persist zsh history
+# == Persist zsh history ==
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE=10000
 # shellcheck disable=SC2034
 SAVEHIST=1000
 setopt SHARE_HISTORY
 
-## Prompt configuration
+# == Prompt configuration == 
 setopt prompt_subst
 
-# Git prompt configuration for MacOS
+# === Git prompt configuration for MacOS ===
 if is_macos; then
     GITPROMPT_SCRIPT='/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh'
 fi
 
+# === Git prompt configuration for Linux ===
 if is_linux; then
     # Set LINUX_GITPROMPT_SCRIPT_PATH in "${ZDOTDIR}/extras/.zshenv_local"
     GITPROMPT_SCRIPT="${LINUX_GITPROMPT_SCRIPT_PATH}"
 fi
 
+# === Git prompt definition ===
 if [[ -f "${GITPROMPT_SCRIPT}" ]]; then
     # shellcheck disable=SC1090
     source "${GITPROMPT_SCRIPT}"
-    # Define the prompt
     PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %F{yellow}\$(__git_ps1)%f]$ "
 else
-    # Define the prompt
     # shellcheck disable=SC2034
     PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f]$ "
 fi
 
-## Antidote plugin setup
+# == Antidote plugin setup ==
 zsh_plugins="${ZDOTDIR}/.zsh_plugins"
 
 if is_macos; then
@@ -62,31 +65,38 @@ fi
 # shellcheck disable=SC1090
 source "${zsh_plugins}".zsh
 
-## Keyboard behaviour
-# Move forward by word with Option+RightArrow or Alt+RightArrow
+# == Keyboard behaviour ==
+# === Move forward by word with Option+RightArrow or Alt+RightArrow ===
 bindkey '^[^[[C' forward-word
 
-# Move backward by word with Option+LeftArrow or Alt+LeftArrow
+# === Move backward by word with Option+LeftArrow or Alt+LeftArrow ===
 bindkey '^[^[[D' backward-word
 
-### Bindkey to use fn
+# === Bindkey to use fn ===
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
-# zsh-history-substring-search configuration
+# === Fn + Delete deletes the character to the right of the cursor ===
+if is_linux; then
+    bindkey '^[[3~' delete-char
+fi
+
+# === zsh-history-substring-search configuration ===
 bindkey '^[[A' history-substring-search-up # or '\eOA'
 bindkey '^[[B' history-substring-search-down # or '\eOB'
 # shellcheck disable=SC2034
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
-# Aliases
-## Call neovim instead of vim
+# ===================
+# =     Aliases     =
+# ===================
+# == Call neovim instead of vim == 
 if is_macos; then
     # shellcheck disable=SC2139
     alias vim="${HOMEBREW_PREFIX}/bin/nvim"
 fi
 
-## Kubernetes
+# == Kubernetes ==
 alias k='kubectl'
 
 # Check if .zshrc_local exists and source it

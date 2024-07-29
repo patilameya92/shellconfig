@@ -8,7 +8,7 @@
 
 OS_TYPE=$(uname -s)
 
-# Function to check if the OS is MacOS
+# Function to check if the OS is macOS
 is_macos() {
     [[ "${OS_TYPE}" == "Darwin" ]]
 }
@@ -22,8 +22,6 @@ if is_macos; then
     # Golang
     export GOROOT=/usr/local/go
     export GOPATH="/Users/${USER}/code"
-
-    # PATH
     PATH="${PATH}:${GOROOT}/bin"
 fi
 

@@ -17,7 +17,6 @@ if is_macos; then
     else
         eval "$(/usr/local/bin/brew shellenv)"
     fi
-
 fi
 
 # Check if .zprofile_local exists and source it
