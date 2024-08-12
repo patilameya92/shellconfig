@@ -37,7 +37,7 @@ fi
 if [[ -f "${GITPROMPT_SCRIPT}" ]]; then
     # shellcheck disable=SC1090
     source "${GITPROMPT_SCRIPT}"
-    PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f %F{yellow}\$(__git_ps1)%f]$ "
+    PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f%F{yellow}\$(__git_ps1)%f]$ "
 else
     # shellcheck disable=SC2034
     PROMPT="[%F{magenta}%n%f@%F{green}%m%f %F{cyan}%(3~|../%2~|%~)%f]$ "
